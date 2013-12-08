@@ -1,5 +1,11 @@
 # ResqueSolo
 
+[![Gem Version](https://badge.fury.io/rb/resque_solo.png)][gem]
+[![Build Status](https://api.travis-ci.org/teeparham/resque_solo.png)][build]
+
+[gem]: http://badge.fury.io/rb/resque_solo
+[build]: https://travis-ci.org/teeparham/resque_solo
+
 ResqueSolo is a resque plugin to add unique jobs to resque.
 
 It is a re-write of [resque-loner](https://github.com/jayniz/resque-loner).
