@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = %w(tee@neighborland.com)
   spec.description   = %q{Resque plugin to add unique jobs}
   spec.summary       = %q{Resque plugin to add unique jobs}
-  spec.homepage      = "https://github.com/teeparham/resque_solo"
+  spec.homepage      = "https://github.com/neighborland/resque_solo"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
