@@ -7,6 +7,7 @@ group :test do
   gem 'pry'
   gem 'pry-byebug', platform: :mri_20
   gem 'fakeredis'
+  gem 'simplecov', require: false
 end
 
 gemspec

@@ -1,3 +1,8 @@
+if ENV['SIMPLE_COV']
+  require 'simplecov'
+  SimpleCov.start
+end
+
 require 'test/unit'
 require 'shoulda-context'
 require 'mocha/setup'
