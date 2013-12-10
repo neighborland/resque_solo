@@ -5,6 +5,12 @@ class ResqueTest < Test::Unit::TestCase
     Resque.redis.flushall
   end
 
+  should "be a valid plugin" do
+    assert_nothing_raised do
+      Resque::Plugin.lint(Resque::Plugins::UniqueJob)
+    end
+  end
+
   should "enqueue normal jobs" do
     Resque.enqueue FakeJob, "x"
     Resque.enqueue FakeJob, "x"
