@@ -1,13 +1,13 @@
 module Resque
   class Job
     class << self
-      # Mark an item as queued after Resque::Job.create has called Resque.push
+      # Mark an item as queued
       def create_solo(queue, klass, *args)
-        return create_without_solo(queue, klass, *args) if Resque.inline?
         item = {class: klass.to_s, args: args}
+        return create_without_solo(queue, klass, *args) if Resque.inline? || !ResqueSolo::Queue.is_unique?(item)
         return "EXISTED" if ResqueSolo::Queue.queued?(queue, item)
-        # multi returns array of keys
         create_return_value = false
+        # redis transaction block
         Resque.redis.multi do
           create_return_value = create_without_solo(queue, klass, *args)
           ResqueSolo::Queue.mark_queued(queue, item)
@@ -22,8 +22,7 @@ module Resque
         item
       end
 
-      # Mark all destroyed jobs as unqueued.
-      # The original method only returns the amount of jobs destroyed, but not the jobs themselves.
+      # Mark destroyed jobs as unqueued
       def destroy_solo(queue, klass, *args)
         ResqueSolo::Queue.destroy(queue, klass, *args) unless Resque.inline?
         destroy_without_solo(queue, klass, *args)
