@@ -11,14 +11,14 @@ module Resque
         # Payload is what Resque stored for this job along with the job's class name:
         # a hash containing :class and :args
         def redis_key(payload)
-          payload = JSON.parse(JSON.generate(payload)) # todo - .stringify_keys
+          payload = Resque.decode(Resque.encode(payload))
           job  = payload["class"]
           args = payload["args"]
           args.map! do |arg|
             arg.is_a?(Hash) ? arg.sort : arg
           end
 
-          Digest::MD5.hexdigest JSON.generate(class: job, args: args)
+          Digest::MD5.hexdigest Resque.encode(class: job, args: args)
         end
 
         # The default ttl of a locking key is -1 (forever).
