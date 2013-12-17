@@ -75,7 +75,7 @@ module ResqueSolo
       end
 
       def const_for(item)
-        const_get item_class(item)
+        Resque::Job.new(nil, nil).constantize item_class(item)
       end
     end
   end
