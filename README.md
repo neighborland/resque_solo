@@ -18,7 +18,9 @@ It removes the dependency on `Resque::Helpers`, which is deprecated for resque 2
 
 Add the gem to your Gemfile:
 
-    gem 'resque_solo'
+```ruby
+gem 'resque_solo'
+```
 
 ## Usage
 
@@ -49,3 +51,14 @@ Resque.enqueued? UpdateCat, 1
 Resque.enqueued_in? :dogs, UpdateCat, 1
 => false
 ```
+
+### `lock_after_execution_period`
+
+By default, lock_after_execution_period is 0 and `enqueued?` becomes false as soon as the job
+is being worked on.
+
+The `lock_after_execution_period` setting can be used to delay when the unique job key is deleted
+(i.e. when `enqueued?` becomes `false`). For example, if you have a long-running unique job that
+takes around 10 seconds, and you don't want to requeue another job until you are sure it is done,
+you could set `lock_after_execution_period = 20`. Or if you never want to run a long running
+job more than once per minute, set `lock_after_execution_period = 60`.
