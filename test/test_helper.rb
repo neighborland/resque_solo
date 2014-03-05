@@ -3,13 +3,10 @@ if ENV['SIMPLE_COV']
   SimpleCov.start
 end
 
-require 'test/unit'
-require 'shoulda-context'
-require 'mocha/setup'
+require 'minitest/autorun'
 require 'resque_solo'
 require 'fake_jobs'
 require 'fakeredis'
-require 'pry'
 begin
   require 'pry-byebug'
 rescue LoadError

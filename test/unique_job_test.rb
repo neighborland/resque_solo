@@ -1,5 +1,5 @@
 require 'test_helper'
 
-class UniqueJobTest < Test::Unit::TestCase
+class UniqueJobTest < MiniTest::Spec
 
 end

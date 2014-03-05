@@ -1,12 +1,9 @@
 source 'https://rubygems.org'
 
 group :test do
-  gem 'test-unit'
-  gem 'mocha'
-  gem 'shoulda-context'
-  gem 'pry'
-  gem 'pry-byebug', platform: :mri_20
-  gem 'fakeredis'
+  unless ENV['TRAVIS']
+    gem 'pry-byebug', platform: :mri_21
+  end
   gem 'simplecov', require: false
 end
 
