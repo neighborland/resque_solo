@@ -1,9 +1,9 @@
 # ResqueSolo
 
-[![Gem Version](https://badge.fury.io/rb/resque_solo.png)][gem]
-[![Build Status](https://api.travis-ci.org/neighborland/resque_solo.png)][build]
+[![Gem Version](http://img.shields.io/gem/v/resque_solo.svg)][gem]
+[![Build Status](http://img.shields.io/travis/neighborland/resque_solo.svg)][build]
 
-[gem]: http://badge.fury.io/rb/resque_solo
+[gem]: http://rubygems.org/gems/resque_solo
 [build]: https://travis-ci.org/neighborland/resque_solo
 
 ResqueSolo is a resque plugin to add unique jobs to resque.
@@ -52,7 +52,9 @@ Resque.enqueued_in? :dogs, UpdateCat, 1
 => false
 ```
 
-### `lock_after_execution_period`
+### Options
+
+#### `lock_after_execution_period`
 
 By default, lock_after_execution_period is 0 and `enqueued?` becomes false as soon as the job
 is being worked on.
