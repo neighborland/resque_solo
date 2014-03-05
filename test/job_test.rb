@@ -61,7 +61,7 @@ class JobTest < Test::Unit::TestCase
     refute Resque.enqueued?(FakeUniqueJob, "bar")
   end
 
-  should "report if a job is enqueued" do
+  should "report if a unique job is enqueued in another queue" do
     default_queue = FakeUniqueJob.instance_variable_get(:@queue)
     FakeUniqueJob.instance_variable_set(:@queue, :other)
     Resque.enqueue FakeUniqueJob, "foo"
