@@ -6,27 +6,27 @@ module ResqueSolo
       it "is false for non-unique job" do
         refute Queue.is_unique?(class: 'FakeJob')
       end
-  
+
       it "is false for invalid job class" do
         refute Queue.is_unique?(class: 'InvalidJob')
       end
-  
+
       it "is true for unique job" do
         assert Queue.is_unique?(class: 'FakeUniqueJob')
       end
     end
-    
+
     describe ".item_ttl" do
       it "is -1 for non-unique job" do
-        assert_equal -1, Queue.item_ttl(class: 'FakeJob')
+        assert_equal(-1, Queue.item_ttl(class: 'FakeJob'))
       end
 
       it "is -1 for invalid job class" do
-        assert_equal -1, Queue.item_ttl(class: 'InvalidJob')
+        assert_equal(-1, Queue.item_ttl(class: 'InvalidJob'))
       end
 
       it "is -1 for unique job" do
-        assert_equal -1, Queue.item_ttl(class: 'FakeUniqueJob')
+        assert_equal(-1, Queue.item_ttl(class: 'FakeUniqueJob'))
       end
 
       it "is job TTL" do
