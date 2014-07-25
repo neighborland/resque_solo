@@ -31,7 +31,7 @@ module Resque
         #   end
         # end
         def ttl
-          @ttl || -1
+          @ttl ||= -1
         end
 
         # The default ttl of a persisting key is 0, i.e. immediately deleted.
@@ -45,7 +45,7 @@ module Resque
         #   end
         # end
         def lock_after_execution_period
-          @lock_after_execution_period || 0
+          @lock_after_execution_period ||= 0
         end
       end
     end
