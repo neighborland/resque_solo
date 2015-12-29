@@ -53,8 +53,8 @@ module ResqueSolo
 
         redis.lrange(redis_queue, 0, -1).each do |string|
           json = Resque.decode(string)
-          next unless json['class'] == klass
-          next unless json['args'] == args if args.any?
+          next unless json["class"] == klass
+          next unless json["args"] == args if args.any?
           ResqueSolo::Queue.mark_unqueued(queue, json)
         end
       end
@@ -71,7 +71,7 @@ module ResqueSolo
       end
 
       def item_class(item)
-        item[:class] || item['class']
+        item[:class] || item["class"]
       end
 
       def const_for(item)

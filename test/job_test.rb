@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class JobTest < MiniTest::Spec
   before do

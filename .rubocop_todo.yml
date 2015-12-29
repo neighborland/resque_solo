@@ -53,9 +53,3 @@ Style/SpecialGlobalVars:
   Exclude:
     - 'resque_solo.gemspec'
 
-# Offense count: 43
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/StringLiterals:
-  Enabled: false
-
