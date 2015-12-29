@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ResqueSolo::VERSION
   spec.authors       = ["Tee Parham"]
   spec.email         = %w(tee@neighborland.com)
-  spec.description   = %q{Resque plugin to add unique jobs}
-  spec.summary       = %q{Resque plugin to add unique jobs}
+  spec.description   = 'Resque plugin to add unique jobs'
+  spec.summary       = 'Resque plugin to add unique jobs'
   spec.homepage      = "https://github.com/neighborland/resque_solo"
   spec.license       = "MIT"
 
