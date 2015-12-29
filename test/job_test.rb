@@ -46,12 +46,12 @@ class JobTest < MiniTest::Spec
   end
 
   it "mark jobs as unqueued when they raise an exception" do
-    2.times { Resque.enqueue( FailingUniqueJob, "foo" ) }
+    2.times { Resque.enqueue(FailingUniqueJob, "foo") }
     assert_equal 1, Resque.size(:unique)
     worker = Resque::Worker.new(:unique)
     worker.work 0
     assert_equal 0, Resque.size(:unique)
-    2.times { Resque.enqueue( FailingUniqueJob, "foo" ) }
+    2.times { Resque.enqueue(FailingUniqueJob, "foo") }
     assert_equal 1, Resque.size(:unique)
   end
 
@@ -103,5 +103,4 @@ class JobTest < MiniTest::Spec
     assert_equal 1, keys.length
     assert_in_delta UniqueJobWithLock.lock_after_execution_period, Resque.redis.ttl(keys.first), 2
   end
-  
 end

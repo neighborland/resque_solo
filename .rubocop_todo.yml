@@ -16,12 +16,6 @@ Lint/HandleExceptions:
 Metrics/LineLength:
   Max: 112
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: SupportedStyles.
-Style/AccessModifierIndentation:
-  EnforcedStyle: outdent
-
 # Offense count: 6
 # Configuration parameters: Exclude.
 Style/Documentation:
@@ -33,14 +27,6 @@ Style/Documentation:
     - 'lib/resque_solo/queue.rb'
     - 'lib/resque_solo/unique_job.rb'
     - 'lib/resque_solo/version.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundClassBody:
-  Exclude:
-    - 'test/resque_test.rb'
-    - 'test/unique_job_test.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -68,19 +54,6 @@ Style/PredicateName:
   Exclude:
     - 'lib/resque_solo/queue.rb'
 
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForEmptyBraces, SupportedStyles.
-Style/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
-
-# Offense count: 5
-# Cop supports --auto-correct.
-Style/SpaceInsideParens:
-  Exclude:
-    - 'lib/resque_ext/resque.rb'
-    - 'test/job_test.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/SpecialGlobalVars:
@@ -92,19 +65,6 @@ Style/SpecialGlobalVars:
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/StringLiterals:
   Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/TrailingBlankLines:
-  Exclude:
-    - 'test/fake_jobs.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/TrailingWhitespace:
-  Exclude:
-    - 'test/job_test.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.

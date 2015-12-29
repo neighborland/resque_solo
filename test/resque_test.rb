@@ -22,5 +22,4 @@ class ResqueTest < MiniTest::Spec
   it "does not raise when deleting an empty queue" do
     Resque.remove_queue(:unique)
   end
-
 end

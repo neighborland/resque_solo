@@ -64,7 +64,7 @@ module ResqueSolo
         redis.del(*keys) if keys.any?
       end
 
-    private
+      private
 
       def redis
         Resque.redis
