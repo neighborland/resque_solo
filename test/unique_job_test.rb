@@ -1,5 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class UniqueJobTest < MiniTest::Spec
-
 end

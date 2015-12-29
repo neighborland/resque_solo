@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class ResqueTest < MiniTest::Spec
   before do
@@ -22,5 +22,4 @@ class ResqueTest < MiniTest::Spec
   it "does not raise when deleting an empty queue" do
     Resque.remove_queue(:unique)
   end
-
 end

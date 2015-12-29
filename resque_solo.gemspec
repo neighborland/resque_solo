@@ -1,15 +1,15 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'resque_solo/version'
+require "resque_solo/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "resque_solo"
   spec.version       = ResqueSolo::VERSION
   spec.authors       = ["Tee Parham"]
   spec.email         = %w(tee@neighborland.com)
-  spec.description   = %q{Resque plugin to add unique jobs}
-  spec.summary       = %q{Resque plugin to add unique jobs}
+  spec.description   = "Resque plugin to add unique jobs"
+  spec.summary       = "Resque plugin to add unique jobs"
   spec.homepage      = "https://github.com/neighborland/resque_solo"
   spec.license       = "MIT"
 
