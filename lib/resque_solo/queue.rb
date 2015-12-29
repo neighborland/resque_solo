@@ -54,7 +54,7 @@ module ResqueSolo
         redis.lrange(redis_queue, 0, -1).each do |string|
           json = Resque.decode(string)
           next unless json["class"] == klass
-          next unless json["args"] == args if args.any?
+          next if args.any? && json["args"] != args
           ResqueSolo::Queue.mark_unqueued(queue, json)
         end
       end

@@ -36,12 +36,6 @@ Style/IfUnlessModifier:
     - 'Gemfile'
 
 # Offense count: 1
-# Cop supports --auto-correct.
-Style/NestedModifier:
-  Exclude:
-    - 'lib/resque_solo/queue.rb'
-
-# Offense count: 1
 # Configuration parameters: NamePrefix, NamePrefixBlacklist, NameWhitelist.
 Style/PredicateName:
   Exclude:
