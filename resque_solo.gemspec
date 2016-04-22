@@ -13,9 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/neighborland/resque_solo"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
-  spec.executables   = []
-  spec.test_files    = spec.files.grep(%r{^(test|features)/})
+  spec.files         = Dir["LICENSE.txt", "README.md", "lib/**/*"]
   spec.require_paths = %w(lib)
 
   spec.required_ruby_version = ">= 1.9.3"
