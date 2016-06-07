@@ -28,7 +28,6 @@ module Resque
         # class FooJob
         #   include Resque::Plugins::UniqueJob
         #   @ttl = 40
-        #   end
         # end
         def ttl
           @ttl ||= -1
@@ -42,7 +41,6 @@ module Resque
         # class FooJob
         #   include Resque::Plugins::UniqueJob
         #   @lock_after_execution_period = 40
-        #   end
         # end
         def lock_after_execution_period
           @lock_after_execution_period ||= 0
