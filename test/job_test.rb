@@ -101,6 +101,7 @@ class JobTest < MiniTest::Spec
     Resque.reserve(:unique_with_lock)
     keys = Resque.redis.keys "solo:queue:unique_with_lock:job:*"
     assert_equal 1, keys.length
-    assert_in_delta UniqueJobWithLock.lock_after_execution_period, Resque.redis.ttl(keys.first), 2
+    assert_in_delta UniqueJobWithLock.lock_after_execution_period,
+                    Resque.redis.ttl(keys.first), 2
   end
 end

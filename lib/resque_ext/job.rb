@@ -4,7 +4,9 @@ module Resque
       # Mark an item as queued
       def create_solo(queue, klass, *args)
         item = { class: klass.to_s, args: args }
-        return create_without_solo(queue, klass, *args) if Resque.inline? || !ResqueSolo::Queue.is_unique?(item)
+        if Resque.inline? || !ResqueSolo::Queue.is_unique?(item)
+          return create_without_solo(queue, klass, *args)
+        end
         return "EXISTED" if ResqueSolo::Queue.queued?(queue, item)
         create_return_value = false
         # redis transaction block
