@@ -86,7 +86,7 @@ class JobTest < MiniTest::Spec
     assert_in_delta UniqueJobWithTtl.ttl, Resque.redis.ttl(keys.first), 2
   end
 
-  it "not allow the same job to be enqueued after execution if lock_after_execution_period is set" do
+  it "prevents duplicates within lock_after_execution_period" do
     Resque.enqueue UniqueJobWithLock, "foo"
     Resque.enqueue UniqueJobWithLock, "foo"
     assert_equal 1, Resque.size(:unique_with_lock)
