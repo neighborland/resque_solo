@@ -39,11 +39,11 @@ If you attempt to queue a unique job multiple times, it is ignored:
 
 ```
 Resque.enqueue UpdateCat, 1
-=> "OK"
+=> true
 Resque.enqueue UpdateCat, 1
-=> "EXISTED"
+=> nil
 Resque.enqueue UpdateCat, 1
-=> "EXISTED"
+=> nil
 Resque.size :cats
 => 1
 Resque.enqueued? UpdateCat, 1
