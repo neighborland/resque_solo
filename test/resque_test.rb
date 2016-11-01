@@ -22,4 +22,24 @@ class ResqueTest < MiniTest::Spec
   it "does not raise when deleting an empty queue" do
     Resque.remove_queue(:unique)
   end
+
+  describe "#enqueue_to" do
+    describe "non-unique job" do
+      it "should return true if job was enqueued" do
+        assert Resque.enqueue_to(:normal, FakeJob)
+        assert Resque.enqueue_to(:normal, FakeJob)
+      end
+    end
+
+    describe "unique job" do
+      it "should return true if job was enqueued" do
+        assert Resque.enqueue_to(:normal, FakeUniqueJob)
+      end
+
+      it "should return nil if job already existed" do
+        Resque.enqueue_to(:normal, FakeUniqueJob)
+        assert_nil Resque.enqueue_to(:normal, FakeUniqueJob)
+      end
+    end
+  end
 end
