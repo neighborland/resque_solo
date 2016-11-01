@@ -1,5 +1,7 @@
 module Resque
   class << self
+    # Override
+    # https://github.com/resque/resque/blob/master/lib/resque.rb
     def enqueue_to(queue, klass, *args)
       # Perform before_enqueue hooks. Don't perform enqueue if any hook returns false
       before_hooks = Plugin.before_enqueue_hooks(klass).collect do |hook|
