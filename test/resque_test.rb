@@ -12,7 +12,8 @@ class ResqueTest < MiniTest::Spec
   it "enqueues normal jobs" do
     Resque.enqueue FakeJob, "x"
     Resque.enqueue FakeJob, "x"
-    assert_equal 2, Resque.size(:normal)
+    queue_name = FakeJob.instance_variable_get(:@queue)
+    assert_equal 2, Resque.size(queue_name)
   end
 
   it "is not able to report if a non-unique job was enqueued" do
@@ -26,19 +27,25 @@ class ResqueTest < MiniTest::Spec
   describe "#enqueue_to" do
     describe "non-unique job" do
       it "should return true if job was enqueued" do
-        assert Resque.enqueue_to(:normal, FakeJob)
-        assert Resque.enqueue_to(:normal, FakeJob)
+        queue_name = FakeJob.instance_variable_get(:@queue)
+        assert Resque.enqueue_to(queue_name, FakeJob)
+        assert Resque.enqueue_to(queue_name, FakeJob)
       end
     end
 
     describe "unique job" do
+      before do
+        @queue_name = FakeUniqueJob.instance_variable_get(:@queue)
+      end
+
       it "should return true if job was enqueued" do
-        assert Resque.enqueue_to(:normal, FakeUniqueJob)
+        assert Resque.enqueue_to(@queue_name, FakeUniqueJob)
       end
 
       it "should return nil if job already existed" do
-        Resque.enqueue_to(:normal, FakeUniqueJob)
-        assert_nil Resque.enqueue_to(:normal, FakeUniqueJob)
+        Resque.enqueue_to(@queue_name, FakeUniqueJob)
+        assert Resque.enqueued?(FakeUniqueJob)
+        assert_nil Resque.enqueue_to(@queue_name, FakeUniqueJob)
       end
     end
   end

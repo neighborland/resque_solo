@@ -45,6 +45,14 @@ module Resque
         def lock_after_execution_period
           @lock_after_execution_period ||= 0
         end
+
+        # We want this to run first in before_enqueue_hooks (which are alpha sorted), so name appropriately
+        def before_enqueue_001_solo_job(*args)
+          queue_name = self.instance_variable_get(:@queue)
+          item = { class: self.to_s, args: args }
+          !ResqueSolo::Queue.queued?(queue_name, item)
+        end
+
       end
     end
   end
