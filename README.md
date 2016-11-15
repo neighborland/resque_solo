@@ -28,6 +28,7 @@ gem 'resque_solo'
 class UpdateCat
   include Resque::Plugins::UniqueJob
   @queue = :cats
+  @lock_after_execution_period = 20
 
   def self.perform(cat_id)
     # do something

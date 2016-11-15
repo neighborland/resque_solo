@@ -7,11 +7,12 @@ module ResqueSolo
       end
 
       def mark_queued(queue, item)
-        return unless is_unique?(item)
         key = unique_key(queue, item)
-        redis.set(key, 1)
+        res = redis.setnx(key, 1)
+        return false unless res
         ttl = item_ttl(item)
         redis.expire(key, ttl) if ttl >= 0
+        res
       end
 
       def mark_unqueued(queue, job)
