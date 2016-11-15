@@ -48,9 +48,23 @@ module Resque
 
         # We want this to run first in before_enqueue_hooks (which are alpha sorted), so name appropriately
         def before_enqueue_001_solo_job(*args)
-          queue_name = self.instance_variable_get(:@queue)
-          item = { class: self.to_s, args: args }
-          !ResqueSolo::Queue.queued?(queue_name, item)
+          queue_name, item = get_queue_and_item(*args)
+          # This returns false if the key was already set
+          ResqueSolo::Queue.mark_queued(queue_name, item)
+        end
+
+        # Always marks unqueued, even on failure
+        def around_perform_solo_job(*args)
+          queue_name, item = get_queue_and_item(*args)
+          begin
+            yield
+          ensure
+            ResqueSolo::Queue.mark_unqueued(queue_name, item)
+          end
+        end
+
+        def get_queue_and_item(*args)
+          [self.instance_variable_get(:@queue), { class: self.to_s, args: args }]
         end
 
       end

@@ -15,3 +15,7 @@ rescue LoadError
 end
 
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new({ color: true })]
+
+def perform_one_manually(queue_name)
+  Resque::Job.reserve(queue_name).perform
+end
