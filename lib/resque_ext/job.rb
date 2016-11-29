@@ -20,14 +20,7 @@ module Resque
         if Resque.inline? || !ResqueSolo::Queue.is_unique?(item)
           return create_without_solo(queue, klass, *args)
         end
-
-        create_return_value = false
-        # redis transaction block
-        Resque.redis.multi do
-          create_return_value = create_without_solo(queue, klass, *args)
-          ResqueSolo::Queue.mark_queued(queue, item)
-        end
-        create_return_value
+        ResqueSolo::Queue.mark_queued(queue, item) ? create_without_solo(queue, klass, *args) : false
       end
 
       # Mark destroyed jobs as unqueued
