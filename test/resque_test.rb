@@ -41,6 +41,16 @@ class ResqueTest < MiniTest::Spec
         assert Resque.enqueued?(FakeUniqueJob)
         assert_nil Resque.enqueue_to(:unique, FakeUniqueJob)
       end
+
+      it "should not mark enqueued if another before_enqueue hook fails" do
+        assert_nil Resque.enqueue_to(:unique, EnqueueFailUniqueJob), "Should not have been actually enqueued"
+        refute Resque.enqueued?(EnqueueFailUniqueJob), "Should not have been marked enqueued"
+      end
+
+      it "should not mark enqueued if another before_enqueue hook errors" do
+        assert_raises { Resque.enqueue_to(:unique, EnqueueErrorUniqueJob) }
+        refute Resque.enqueued?(EnqueueErrorUniqueJob), "Should not have been marked enqueued"
+      end
     end
   end
 end

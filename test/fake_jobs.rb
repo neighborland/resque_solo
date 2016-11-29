@@ -36,3 +36,51 @@ class UniqueJobWithLock
   def self.perform(*_)
   end
 end
+
+class EnqueueFailUniqueJob
+  include Resque::Plugins::UniqueJob
+  @queue = :unique
+
+  def self.perform(_)
+  end
+
+  def self.before_enqueue_fail
+    false
+  end
+end
+
+class EnqueueErrorUniqueJob
+  include Resque::Plugins::UniqueJob
+  @queue = :unique
+
+  def self.perform(_)
+  end
+
+  def self.before_enqueue_zzz_error
+    raise "Fail"
+  end
+end
+
+class DontPerformUniqueJob
+  include Resque::Plugins::UniqueJob
+  @queue = :unique
+
+  def self.perform(_)
+  end
+
+  def self.before_perform_dont
+    raise Resque::Job::DontPerform
+  end
+end
+
+class BeforePerformErrorUniqueJob
+  include Resque::Plugins::UniqueJob
+  @queue = :unique
+
+  def self.perform(_)
+  end
+
+  def self.before_perform_dont
+    raise "Fail"
+  end
+end

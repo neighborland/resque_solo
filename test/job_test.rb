@@ -54,6 +54,24 @@ class JobTest < MiniTest::Spec
     assert_equal 1, Resque.size(:unique)
   end
 
+  it "mark jobs as unqueued when a before_perform filter raises an exception" do
+    2.times { Resque.enqueue(BeforePerformErrorUniqueJob, "foo") }
+    assert_equal 1, Resque.size(:unique)
+    assert_raises { perform_one_manually(:unique) }
+    assert_equal 0, Resque.size(:unique)
+    2.times { Resque.enqueue(BeforePerformErrorUniqueJob, "foo") }
+    assert_equal 1, Resque.size(:unique)
+  end
+
+  it "mark jobs as unqueued when a before_perform filter raises a DontPerform exception" do
+    2.times { Resque.enqueue(DontPerformUniqueJob, "foo") }
+    assert_equal 1, Resque.size(:unique)
+    assert_raises { perform_one_manually(:unique) }
+    assert_equal 0, Resque.size(:unique)
+    2.times { Resque.enqueue(DontPerformUniqueJob, "foo") }
+    assert_equal 1, Resque.size(:unique)
+  end
+
   it "report if a unique job is enqueued" do
     Resque.enqueue FakeUniqueJob, "foo"
     assert Resque.enqueued?(FakeUniqueJob, "foo")

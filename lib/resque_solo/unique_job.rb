@@ -48,16 +48,7 @@ module Resque
 
         def before_enqueue_solo_job(*args)
           # This returns false if the key was already set
-          ResqueSolo::Queue.mark_queued(@queue, { class: self.to_s, args: args })
-        end
-
-        # Always marks unqueued, even on failure
-        def around_perform_solo_job(*args)
-          begin
-            yield
-          ensure
-            ResqueSolo::Queue.mark_unqueued(@queue, { class: self.to_s, args: args })
-          end
+          !ResqueSolo::Queue.queued?(@queue, { class: self.to_s, args: args })
         end
       end
     end
