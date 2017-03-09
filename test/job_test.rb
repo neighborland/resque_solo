@@ -2,7 +2,7 @@ require "test_helper"
 
 class JobTest < MiniTest::Spec
   before do
-    Resque.redis.flushall
+    Resque.redis.redis.flushdb
   end
 
   it "enqueue identical jobs once" do
