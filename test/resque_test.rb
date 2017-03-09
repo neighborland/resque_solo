@@ -2,7 +2,7 @@ require "test_helper"
 
 class ResqueTest < MiniTest::Spec
   before do
-    Resque.redis.flushall
+    Resque.redis.redis.flushdb
   end
 
   it "is a valid plugin" do
