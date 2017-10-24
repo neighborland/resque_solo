@@ -65,3 +65,15 @@ The `lock_after_execution_period` setting can be used to delay when the unique j
 takes around 10 seconds, and you don't want to requeue another job until you are sure it is done,
 you could set `lock_after_execution_period = 20`. Or if you never want to run a long running
 job more than once per minute, set `lock_after_execution_period = 60`.
+
+```ruby
+class UpdateCat
+  include Resque::Plugins::UniqueJob
+  @queue = :cats
+  @lock_after_execution_period = 20
+
+  def self.perform(cat_id)
+    # do something
+  end
+end
+```
