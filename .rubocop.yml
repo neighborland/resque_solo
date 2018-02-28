@@ -1,9 +1,13 @@
 inherit_from: .rubocop_todo.yml
 
-Style/AlignParameters:
+AllCops:
+  TargetRubyVersion: 2.2
+  DisplayCopNames: true
+
+Layout/AlignParameters:
   Enabled: false
 
-Style/MultilineOperationIndentation:
+Layout/MultilineOperationIndentation:
   Enabled: false
 
 Style/SignalException:
