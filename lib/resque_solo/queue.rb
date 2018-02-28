@@ -60,8 +60,12 @@ module ResqueSolo
       end
 
       def cleanup(queue)
-        keys = redis.keys("solo:queue:#{queue}:job:*")
-        redis.del(*keys) if keys.any?
+        cursor = "0"
+        loop do
+          cursor, keys = redis.scan(cursor, match: "solo:queue:#{queue}:job:*")
+          redis.del(*keys) if keys.any?
+          break if cursor.to_i.zero?
+        end
       end
 
       private
