@@ -10,11 +10,13 @@ Layout/AlignParameters:
 Layout/MultilineOperationIndentation:
   Enabled: false
 
-Style/SignalException:
-  EnforcedStyle: only_raise
+Naming/UncommunicativeMethodParamName:
+  Exclude:
+    - 'test/fake_jobs.rb'
 
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
+Style/EmptyMethod:
+  Exclude:
+    - 'test/fake_jobs.rb'
 
 Style/FrozenStringLiteralComment:
   Exclude:
@@ -23,3 +25,9 @@ Style/FrozenStringLiteralComment:
     - 'Rakefile'
     - 'gemfiles/*'
     - 'resque_solo.gemspec'
+
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
