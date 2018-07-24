@@ -15,3 +15,11 @@ Style/SignalException:
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'Appraisals'
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'gemfiles/*'
+    - 'resque_solo.gemspec'
