@@ -10,7 +10,7 @@ ResqueSolo is a resque plugin to add unique jobs to resque.
 
 It is a re-write of [resque-loner](https://github.com/jayniz/resque-loner).
 
-It requires resque 1.25 and works with ruby 2.0 and later.
+It requires resque 1.25 or greater and works with ruby 2.3 and later.
 
 It removes the dependency on `Resque::Helpers`, which is deprecated for resque 2.0.
 
@@ -75,4 +75,22 @@ class UpdateCat
     # do something
   end
 end
+```
+
+## Development
+
+Clone this repository, then:
+
+Run tests with resque 1.x locally:
+
+```sh
+bundle
+bundle exec rake test
+```
+
+Test supported versions of resque locally:
+
+```sh
+appraisal install
+appraisal rake test
 ```

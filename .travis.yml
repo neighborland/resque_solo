@@ -5,3 +5,6 @@ rvm:
   - 2.5.1
   - 2.4.4
   - 2.3.7
+gemfile:
+  - gemfiles/resque1.gemfile
+  - gemfiles/resque2.gemfile
