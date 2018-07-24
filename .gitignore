@@ -3,5 +3,6 @@
 .ruby-version
 Gemfile.lock
 coverage
+gemfiles/*.gemfile.lock
 pkg
 tmp
