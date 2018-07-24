@@ -19,7 +19,14 @@ It removes the dependency on `Resque::Helpers`, which is deprecated for resque 2
 Add the gem to your Gemfile:
 
 ```ruby
-gem 'resque_solo'
+gem "resque_solo"
+```
+
+To use with resque 2.0.0, which is unreleased as of 2018/7/24:
+
+```ruby
+gem "resque", git: "https://github.com/resque/resque"
+gem "resque_solo"
 ```
 
 ## Usage
