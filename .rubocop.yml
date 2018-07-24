@@ -10,6 +10,22 @@ Layout/AlignParameters:
 Layout/MultilineOperationIndentation:
   Enabled: false
 
+Naming/UncommunicativeMethodParamName:
+  Exclude:
+    - 'test/fake_jobs.rb'
+
+Style/EmptyMethod:
+  Exclude:
+    - 'test/fake_jobs.rb'
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'Appraisals'
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'gemfiles/*'
+    - 'resque_solo.gemspec'
+
 Style/SignalException:
   EnforcedStyle: only_raise
 
