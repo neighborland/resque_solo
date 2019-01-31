@@ -1,10 +1,6 @@
 source "https://rubygems.org"
 
-group :test do
-  if ENV["BYEBUG"]
-    gem "pry-byebug"
-  end
-  gem "simplecov", require: false
-end
+gem "pry-byebug" if ENV["BYEBUG"]
+gem "simplecov", require: false if ENV["CI"]
 
 gemspec

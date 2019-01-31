@@ -4,8 +4,4 @@ source "https://rubygems.org"
 
 gem "resque", "~> 1.25"
 
-group :test do
-  gem "simplecov", require: false
-end
-
 gemspec path: "../"
