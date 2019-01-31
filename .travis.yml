@@ -2,9 +2,10 @@ language: ruby
 sudo: false
 cache: bundler
 rvm:
-  - 2.5.3
-  - 2.4.4
-  - 2.3.7
+  - 2.6
+  - 2.5
+  - 2.4
+  - 2.3
 gemfile:
   - gemfiles/resque1.gemfile
   - gemfiles/resque2.gemfile
