@@ -22,13 +22,6 @@ Add the gem to your Gemfile:
 gem "resque_solo"
 ```
 
-To use with resque 2.0.0, which is unreleased as of 2018/7/24:
-
-```ruby
-gem "resque", git: "https://github.com/resque/resque"
-gem "resque_solo"
-```
-
 ## Usage
 
 ```ruby
