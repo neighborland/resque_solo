@@ -77,6 +77,27 @@ class UpdateCat
 end
 ```
 
+#### `ttl`
+
+By default the created keys have no expiration time, and this gems removes the
+keys once the job is completed successfully.
+
+If you want to set an expiration time on Redis-level though, you can use the
+`ttl` option.
+
+```ruby
+class UpdateCat
+  include Resque::Plugins::UniqueJob
+
+  @queue = :cats
+  @ttl = 3600 # in seconds
+
+  def self.perform(cat_id)
+    # do something
+  end
+end
+```
+
 ## Development
 
 Clone this repository, then:
