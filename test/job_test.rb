@@ -17,7 +17,7 @@ class JobTest < MiniTest::Spec
     Resque.enqueue FakeUniqueJob, "foo"
     Resque.enqueue FakeUniqueJob, "foo"
     assert_equal 1, Resque.size(:unique)
-    Resque.reserve(:unique)
+    perform_one_manually(:unique)
     assert_equal 0, Resque.size(:unique)
     Resque.enqueue FakeUniqueJob, "foo"
     Resque.enqueue FakeUniqueJob, "foo"
@@ -50,10 +50,27 @@ class JobTest < MiniTest::Spec
   it "mark jobs as unqueued when they raise an exception" do
     2.times { Resque.enqueue(FailingUniqueJob, "foo") }
     assert_equal 1, Resque.size(:unique)
-    worker = Resque::Worker.new(:unique)
-    worker.work 0
+    assert_raises { perform_one_manually(:unique) }
     assert_equal 0, Resque.size(:unique)
     2.times { Resque.enqueue(FailingUniqueJob, "foo") }
+    assert_equal 1, Resque.size(:unique)
+  end
+
+  it "mark jobs as unqueued when a before_perform filter raises an exception" do
+    2.times { Resque.enqueue(BeforePerformErrorUniqueJob, "foo") }
+    assert_equal 1, Resque.size(:unique)
+    assert_raises { perform_one_manually(:unique) }
+    assert_equal 0, Resque.size(:unique)
+    2.times { Resque.enqueue(BeforePerformErrorUniqueJob, "foo") }
+    assert_equal 1, Resque.size(:unique)
+  end
+
+  it "mark jobs as unqueued when a before_perform filter raises a DontPerform exception" do
+    2.times { Resque.enqueue(DontPerformUniqueJob, "foo") }
+    assert_equal 1, Resque.size(:unique)
+    assert_raises { perform_one_manually(:unique) }
+    assert_equal 0, Resque.size(:unique)
+    2.times { Resque.enqueue(DontPerformUniqueJob, "foo") }
     assert_equal 1, Resque.size(:unique)
   end
 
@@ -100,7 +117,7 @@ class JobTest < MiniTest::Spec
 
   it "honor lock_after_execution_period in the redis key" do
     Resque.enqueue UniqueJobWithLock
-    Resque.reserve(:unique_with_lock)
+    perform_one_manually(:unique_with_lock)
     keys = Resque.redis.keys "solo:queue:unique_with_lock:job:*"
     assert_equal 1, keys.length
     assert_in_delta UniqueJobWithLock.lock_after_execution_period,

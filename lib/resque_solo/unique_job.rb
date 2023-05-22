@@ -47,6 +47,11 @@ module Resque
         def lock_after_execution_period
           @lock_after_execution_period ||= 0
         end
+
+        def before_enqueue_solo_job(*args)
+          # This returns false if the key was already set
+          !ResqueSolo::Queue.queued?(@queue, { class: self.to_s, args: args })
+        end
       end
     end
   end
