@@ -11,7 +11,9 @@ module Resque
       end
       return nil if before_hooks.any? { |result| result == false }
 
-      result = Job.create(queue, klass, *args)
+      job = Job.create(queue, klass, *args)
+      result = job.class.eql?(Redis::Future) ? job.value : job
+
       return nil if result == "EXISTED"
 
       Plugin.after_enqueue_hooks(klass).each do |hook|
